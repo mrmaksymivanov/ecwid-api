@@ -1,0 +1,1 @@
+NodeJS wrapper for ecwid.com API
