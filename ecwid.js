@@ -23,7 +23,9 @@ function ecwid(storeId, accessToken) {
     getProducts: getProducts,
     addProduct: addProduct,
     deleteProduct: deleteProduct,
-    updateProudct: updateProudct
+    updateProduct: updateProudct,
+    uploadProductImage: uploadProductImage,
+    deleteProductImage: deleteProductImage
   }
 }
 
@@ -47,10 +49,24 @@ function updateProudct(productId, product) {
   return exec(PATH.products + '/' + productId, 'put', product)
 }
 
-function exec(path, method, data) {
-  var uri = BASE_URL + STORE_ID + '/' + path + '?' + qs.stringify({token: ACCESS_TOKEN});
+function uploadProductImage(productId, buffer) {
+  return request.post({
+    uri: buildURL(PATH.products + '/' + productId + '/image'),
+    headers: {'content-type' : 'image/jpeg'},
+    body: buffer
+  })
+}
 
-  var options = { uri: uri };
+function deleteProductImage(productId) {
+  return exec(PATH.products + '/' + productId + '/image', 'delete')
+}
+
+function buildURL(path) {
+  return BASE_URL + STORE_ID + '/' + path + '?' + qs.stringify({token: ACCESS_TOKEN});
+}
+
+function exec(path, method, data) {
+  var options = { uri: buildURL(path) };
 
   if(data) options.body = JSON.stringify(data);
 
