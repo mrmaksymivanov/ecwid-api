@@ -7,9 +7,16 @@ var STORE_ID;
 var ACCESS_TOKEN;
 var API_VERSION = 'v3';
 var BASE_URL = 'https://app.ecwid.com/api/' + API_VERSION + '/';
+var METHOD = {
+  GET:    'get',
+  POST:   'post',
+  PUT:    'put',
+  DELETE: 'delete'
+};
 var PATH = {
-  profile: 'profile',
-  products: 'products'
+  profile:  'profile',
+  products: 'products',
+  orders:   'orders'
 };
 
 function ecwid(storeId, accessToken) {
@@ -19,34 +26,38 @@ function ecwid(storeId, accessToken) {
   ACCESS_TOKEN = accessToken;
 
   return {
-    getStoreProfile: getStoreProfile,
-    getProducts: getProducts,
-    addProduct: addProduct,
-    deleteProduct: deleteProduct,
-    updateProduct: updateProudct,
+    getStoreProfile:    getStoreProfile,
+    getProducts:        getProducts,
+    addProduct:         addProduct,
+    deleteProduct:      deleteProduct,
+    updateProduct:      updateProduct,
     uploadProductImage: uploadProductImage,
-    deleteProductImage: deleteProductImage
+    deleteProductImage: deleteProductImage,
+    searchOrders:       searchOrders,
+    getOrderDetails:    getOrderDetails,
+    updateOrder:        updateOrder,
+    deleteOrder:        deleteOrder
   }
 }
 
 function getStoreProfile() {
-  return exec(PATH.profile, 'get')
+  return exec(PATH.profile, METHOD.GET)
 }
 
 function getProducts() {
-  return exec(PATH.products, 'get')
+  return exec(PATH.products, METHOD.GET)
 }
 
 function addProduct(product) {
-  return exec(PATH.products, 'post', product)
+  return exec(PATH.products, METHOD.POST, product)
 }
 
 function deleteProduct(productId) {
-  return exec(PATH.products + '/' + productId, 'delete')
+  return exec(PATH.products + '/' + productId, METHOD.DELETE)
 }
 
-function updateProudct(productId, product) {
-  return exec(PATH.products + '/' + productId, 'put', product)
+function updateProduct(productId, product) {
+  return exec(PATH.products + '/' + productId, METHOD.PUT, product)
 }
 
 function uploadProductImage(productId, buffer) {
@@ -58,7 +69,23 @@ function uploadProductImage(productId, buffer) {
 }
 
 function deleteProductImage(productId) {
-  return exec(PATH.products + '/' + productId + '/image', 'delete')
+  return exec(PATH.products + '/' + productId + '/image', METHOD.DELETE)
+}
+
+function searchOrders(options) {
+  return exec(PATH.orders, METHOD.GET, options);
+}
+
+function getOrderDetails(orderNumber) {
+  return exec(PATH.orders + '/' + orderNumber, METHOD.GET);
+}
+
+function updateOrder(orderNumber, data) {
+  return exec(PATH.orders + '/' + orderNumber, METHOD.PUT, data)
+}
+
+function deleteOrder(orderNumber) {
+  return exec(PATH.orders + '/' + orderNumber, METHOD.DELETE);
 }
 
 function buildURL(path) {
@@ -66,9 +93,29 @@ function buildURL(path) {
 }
 
 function exec(path, method, data) {
-  var options = { uri: buildURL(path) };
+  var options = {
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8',
+      'Cache-Control': 'no-cache'
+    }
+  };
 
-  if(data) options.body = JSON.stringify(data);
+  switch (method) {
+    case METHOD.GET:
+    case METHOD.DELETE:
+      options.uri = buildURL(path);
+      if(data) {
+        options.uri += '&' + qs.stringify(data);
+      }
+      break;
+    case METHOD.PUT:
+    case METHOD.POST:
+      options.uri = buildURL(path);
+      if(data) {
+        options.body = JSON.stringify(data);
+      }
+      break;
+  }
 
   return request[method](options).then(function(data) {
     return JSON.parse(data)
