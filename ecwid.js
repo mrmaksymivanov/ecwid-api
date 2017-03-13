@@ -28,6 +28,7 @@ function ecwid(storeId, accessToken) {
 
   return {
     getStoreProfile:    getStoreProfile,
+    searchProducts:     searchProducts,
     getProducts:        getProducts,
     addProduct:         addProduct,
     deleteProduct:      deleteProduct,
@@ -48,6 +49,10 @@ function ecwid(storeId, accessToken) {
 
 function getStoreProfile() {
   return exec(PATH.profile, METHOD.GET)
+}
+
+function searchProducts(options) {
+  return exec(PATH.products, METHOD.GET, options);
 }
 
 function getProducts() {
