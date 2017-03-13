@@ -61,3 +61,8 @@ fs.readFile(imagePath, (err, file) => {
 * getOrderDetails(orderNumber)
 * updateOrder(orderNumber, data)
 * deleteOrder(orderNumber)
+* searchCustomers(options)
+* getCustomer(customerId)
+* createCustomer(data)
+* updateCustomer(customerId, data)
+* deleteCustomer(customerId)

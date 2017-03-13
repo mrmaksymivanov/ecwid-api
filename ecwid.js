@@ -14,9 +14,10 @@ var METHOD = {
   DELETE: 'delete'
 };
 var PATH = {
-  profile:  'profile',
-  products: 'products',
-  orders:   'orders'
+  profile:   'profile',
+  products:  'products',
+  orders:    'orders',
+  customers: 'customers'
 };
 
 function ecwid(storeId, accessToken) {
@@ -36,7 +37,12 @@ function ecwid(storeId, accessToken) {
     searchOrders:       searchOrders,
     getOrderDetails:    getOrderDetails,
     updateOrder:        updateOrder,
-    deleteOrder:        deleteOrder
+    deleteOrder:        deleteOrder,
+    searchCustomers:    searchCustomers,
+    getCustomer:        getCustomer,
+    createCustomer:     createCustomer,
+    updateCustomer:     updateCustomer,
+    deleteCustomer:     deleteCustomer
   }
 }
 
@@ -86,6 +92,26 @@ function updateOrder(orderNumber, data) {
 
 function deleteOrder(orderNumber) {
   return exec(PATH.orders + '/' + orderNumber, METHOD.DELETE);
+}
+
+function searchCustomers(options) {
+  return exec(PATH.customers, METHOD.GET, options);
+}
+
+function getCustomer(customerId) {
+  return exec(PATH.customers + '/' + customerId, METHOD.GET);
+}
+
+function createCustomer(data) {
+  return exec(PATH.customers, METHOD.POST, data);
+}
+
+function updateCustomer(customerId, data) {
+  return exec(PATH.customers + '/' + customerId, METHOD.PUT, data);
+}
+
+function deleteCustomer(customerId) {
+  return exec(PATH.customers + '/' + customerId, METHOD.DELETE);
 }
 
 function buildURL(path) {
