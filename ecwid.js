@@ -30,6 +30,7 @@ function ecwid(storeId, accessToken) {
     getStoreProfile:    getStoreProfile,
     searchProducts:     searchProducts,
     getProducts:        getProducts,
+    getProduct:         getProduct,
     addProduct:         addProduct,
     deleteProduct:      deleteProduct,
     updateProduct:      updateProduct,
@@ -57,6 +58,10 @@ function searchProducts(options) {
 
 function getProducts() {
   return exec(PATH.products, METHOD.GET)
+}
+
+function getProduct(productId) {
+  return exec(PATH.products + '/' + productId, METHOD.GET)
 }
 
 function addProduct(product) {

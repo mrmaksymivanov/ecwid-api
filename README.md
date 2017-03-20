@@ -51,7 +51,9 @@ fs.readFile(imagePath, (err, file) => {
 **The whole list of available methods**
 
 * getStoreProfile
+* searchProducts(options)
 * getProducts
+* getProduct(productId)
 * addProduct(product)
 * deleteProduct(productId)
 * updateProduct(productId, product)
