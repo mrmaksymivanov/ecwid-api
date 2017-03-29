@@ -1,6 +1,6 @@
 {
   "name": "ecwid-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "NodeJS wrapper for ecwid.com API",
   "main": "ecwid.js",
   "scripts": {
