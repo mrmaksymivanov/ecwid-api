@@ -2,7 +2,7 @@
 
 Module fully relies on [ecwid.com REST API](https://developers.ecwid.com/api-documentation) v3
 
-####Simple usage
+**Simple usage**
 
 
 YOUR_STORE_ID and YOUR_PRIVATE_OR_PUBLIC_ACCESS_TOKEN values are reuired to work with 
