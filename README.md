@@ -5,7 +5,7 @@ Module fully relies on [ecwid.com REST API](https://developers.ecwid.com/api-doc
 **Simple usage**
 
 
-YOUR_STORE_ID and YOUR_PRIVATE_OR_PUBLIC_ACCESS_TOKEN values are reuired to work with 
+YOUR_STORE_ID and YOUR_PRIVATE_OR_PUBLIC_ACCESS_TOKEN values are reuired to work with
 [ecwid.com REST API](https://developers.ecwid.com/api-documentation)
 
 ```javascript
@@ -36,14 +36,14 @@ ecwid.addProduct(productData)
 
 **Upload product image**
 
-Product image upload function accepts a Buffer 
+Product image upload function accepts a Buffer
 ```javascript
 const imagePath = 'path/to/my/product/image.jpg'
 fs.readFile(imagePath, (err, file) => {
   if(!err) {
    ecwid.uploadProductImage(productId, file)
        .then(result => ...)
-       .catch(err => ...) 
+       .catch(err => ...)
   }
 })
 ```
@@ -59,6 +59,7 @@ fs.readFile(imagePath, (err, file) => {
 * updateProduct(productId, product)
 * uploadProductImage(productId, buffer)
 * deleteProductImage(productId)
+* updateCategory(categoryId, data)
 * searchOrders(options)
 * getOrderDetails(orderNumber)
 * updateOrder(orderNumber, data)
