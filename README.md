@@ -25,7 +25,7 @@ ecwid.getStoreProfile()
 ```javascript
 const productData = {
     name: 'New product',
-    price: 100),
+    price: 100,
     enabled: true,
     ...
 }
@@ -59,6 +59,7 @@ fs.readFile(imagePath, (err, file) => {
 * updateProduct(productId, product)
 * uploadProductImage(productId, buffer)
 * deleteProductImage(productId)
+* updateCategory(categoryId, data)
 * searchOrders(options)
 * getOrderDetails(orderNumber)
 * updateOrder(orderNumber, data)
