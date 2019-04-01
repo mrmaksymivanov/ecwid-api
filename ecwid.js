@@ -39,6 +39,8 @@ function ecwid(storeId, accessToken) {
     uploadProductImage: uploadProductImage,
     deleteProductImage: deleteProductImage,
 
+    addCategory: addCategory,
+    deleteCategory: deleteCategory,
     updateCategory: updateCategory,
 
     searchOrders: searchOrders,
@@ -108,6 +110,14 @@ function updateOrder(orderNumber, data) {
 
 function deleteOrder(orderNumber) {
   return exec(PATH.orders + '/' + orderNumber, METHOD.DELETE);
+}
+
+function addCategory(category) {
+  return exec(PATH.categories, METHOD.POST, category);
+}
+
+function deleteCategory(categoryId) {
+  return exec(PATH.categories + '/' + categoryId, METHOD.DELETE);
 }
 
 function updateCategory(categoryId, data) {
