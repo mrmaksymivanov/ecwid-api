@@ -28,32 +28,32 @@ function ecwid(storeId, accessToken) {
   ACCESS_TOKEN = accessToken;
 
   return {
-    getStoreProfile: getStoreProfile,
+    getStoreProfile,
 
-    searchProducts: searchProducts,
-    getProducts: getProducts,
-    getProduct: getProduct,
-    addProduct: addProduct,
-    deleteProduct: deleteProduct,
-    updateProduct: updateProduct,
-    uploadProductImage: uploadProductImage,
-    deleteProductImage: deleteProductImage,
+    searchProducts,
+    getProducts,
+    getProduct,
+    addProduct,
+    deleteProduct,
+    updateProduct,
+    uploadProductImage,
+    deleteProductImage,
 
-    getCategories: getCategories,
-    addCategory: addCategory,
-    deleteCategory: deleteCategory,
-    updateCategory: updateCategory,
+    getCategories,
+    addCategory,
+    deleteCategory,
+    updateCategory,
 
-    searchOrders: searchOrders,
-    getOrderDetails: getOrderDetails,
-    updateOrder: updateOrder,
-    deleteOrder: deleteOrder,
+    searchOrders,
+    getOrderDetails,
+    updateOrder,
+    deleteOrder,
 
-    searchCustomers: searchCustomers,
-    getCustomer: getCustomer,
-    createCustomer: createCustomer,
-    updateCustomer: updateCustomer,
-    deleteCustomer: deleteCustomer
+    searchCustomers,
+    getCustomer,
+    createCustomer,
+    updateCustomer,
+    deleteCustomer
   };
 }
 
