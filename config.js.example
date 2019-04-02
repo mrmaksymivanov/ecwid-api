@@ -1,0 +1,4 @@
+module.exports = {
+    storeId: 10000000,
+    secret: "secret_......"
+}

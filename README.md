@@ -72,3 +72,9 @@ fs.readFile(imagePath, (err, file) => {
 * createCustomer(data)
 * updateCustomer(customerId, data)
 * deleteCustomer(customerId)
+
+**Testing**
+
+For running tests copy config.js.example to config.js (gitignored) and fill it with your store id and secret key.
+
+Then run `npm test`
