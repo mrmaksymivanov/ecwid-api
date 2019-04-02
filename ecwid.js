@@ -28,31 +28,32 @@ function ecwid(storeId, accessToken) {
   ACCESS_TOKEN = accessToken;
 
   return {
-    getStoreProfile: getStoreProfile,
+    getStoreProfile,
 
-    searchProducts: searchProducts,
-    getProducts: getProducts,
-    getProduct: getProduct,
-    addProduct: addProduct,
-    deleteProduct: deleteProduct,
-    updateProduct: updateProduct,
-    uploadProductImage: uploadProductImage,
-    deleteProductImage: deleteProductImage,
+    searchProducts,
+    getProducts,
+    getProduct,
+    addProduct,
+    deleteProduct,
+    updateProduct,
+    uploadProductImage,
+    deleteProductImage,
 
-    addCategory: addCategory,
-    deleteCategory: deleteCategory,
-    updateCategory: updateCategory,
+    getCategories,
+    addCategory,
+    deleteCategory,
+    updateCategory,
 
-    searchOrders: searchOrders,
-    getOrderDetails: getOrderDetails,
-    updateOrder: updateOrder,
-    deleteOrder: deleteOrder,
+    searchOrders,
+    getOrderDetails,
+    updateOrder,
+    deleteOrder,
 
-    searchCustomers: searchCustomers,
-    getCustomer: getCustomer,
-    createCustomer: createCustomer,
-    updateCustomer: updateCustomer,
-    deleteCustomer: deleteCustomer
+    searchCustomers,
+    getCustomer,
+    createCustomer,
+    updateCustomer,
+    deleteCustomer
   };
 }
 
@@ -110,6 +111,10 @@ function updateOrder(orderNumber, data) {
 
 function deleteOrder(orderNumber) {
   return exec(PATH.orders + '/' + orderNumber, METHOD.DELETE);
+}
+
+function getCategories(options) {
+  return exec(PATH.categories, METHOD.GET, options);
 }
 
 function addCategory(category) {

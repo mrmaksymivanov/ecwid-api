@@ -59,6 +59,9 @@ fs.readFile(imagePath, (err, file) => {
 * updateProduct(productId, product)
 * uploadProductImage(productId, buffer)
 * deleteProductImage(productId)
+* getCategories(options)
+* addCategory(category)
+* deleteCategory(categoryId)
 * updateCategory(categoryId, data)
 * searchOrders(options)
 * getOrderDetails(orderNumber)
@@ -69,3 +72,9 @@ fs.readFile(imagePath, (err, file) => {
 * createCustomer(data)
 * updateCustomer(customerId, data)
 * deleteCustomer(customerId)
+
+**Testing**
+
+For running tests copy config.js.example to config.js (gitignored) and fill it with your store id and secret key.
+
+Then run `npm test`
