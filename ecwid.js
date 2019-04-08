@@ -71,8 +71,8 @@ function searchProducts(options) {
   return exec(PATH.products, METHOD.GET, options);
 }
 
-function getProducts() {
-  return exec(PATH.products, METHOD.GET);
+function getProducts(options) {
+  return exec(PATH.products, METHOD.GET, options);
 }
 
 function getProduct(productId) {
