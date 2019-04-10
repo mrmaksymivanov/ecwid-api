@@ -3,6 +3,8 @@ var expect = require("chai").expect;
 var { storeId, secret } = require("../config");
 var ecwid = require("../ecwid")(storeId, secret);
 
+const TEST_TIMEOUT = 15000;
+
 // generate random string to name the new category
 var categoryName = crypto.randomBytes(20).toString('hex');
 var categoryId = null;
@@ -16,13 +18,13 @@ describe("Category Functions Test", function() {
         expect(typeof (category.id)).to.be.equal("number");
         expect(category.id).to.be.at.least(1);
         categoryId = category.id;
-    });
+    }).timeout(TEST_TIMEOUT);
     it("should update just created category", async function() {
         let result = await ecwid.updateCategory(categoryId, { description: categoryDescription });
         expect(typeof result).to.be.equal("object");
         expect(typeof (result.updateCount)).to.be.equal("number");
         expect(result.updateCount).to.be.at.equal(1);
-    });
+    }).timeout(TEST_TIMEOUT);
     it("should find just created category", async function() {
         let offset = 0, limit = 5;
         let categories = null, categoryList = [];
@@ -35,11 +37,11 @@ describe("Category Functions Test", function() {
         }
         let createdCategory = categoryList.find(it => it.name == categoryName);
         expect(createdCategory.name).to.be.at.equal(categoryName);
-    });
+    }).timeout(TEST_TIMEOUT);
     it("should delete created category", async function() {
         let result = await ecwid.deleteCategory(categoryId);
         expect(typeof result).to.be.equal("object");
         expect(typeof (result.deleteCount)).to.be.equal("number");
         expect(result.deleteCount).to.be.at.equal(1);
-    });
+    }).timeout(TEST_TIMEOUT);
 });

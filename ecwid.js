@@ -19,7 +19,8 @@ var PATH = {
   orders: 'orders',
   customers: 'customers',
   categories: 'categories',
-  classes: 'classes'
+  classes: 'classes',
+  storage: 'storage'
 };
 
 function ecwid(storeId, accessToken) {
@@ -55,7 +56,13 @@ function ecwid(storeId, accessToken) {
     getCustomer,
     createCustomer,
     updateCustomer,
-    deleteCustomer
+    deleteCustomer,
+
+    getAllStorage,
+    getStorage,
+    addStorage,
+    editStorage,
+    deleteStorage
   };
 }
 
@@ -153,6 +160,26 @@ function updateCustomer(customerId, data) {
 
 function deleteCustomer(customerId) {
   return exec(PATH.customers + '/' + customerId, METHOD.DELETE);
+}
+
+function getAllStorage() {
+  return exec(PATH.storage, METHOD.GET);
+}
+
+function getStorage(key) {
+  return exec(PATH.storage + '/' + key, METHOD.GET);
+}
+
+function addStorage(key, data) {
+  return exec(PATH.storage + '/' + key, METHOD.POST, data);
+}
+
+function editStorage(key, data) {
+  return exec(PATH.storage + '/' + key, METHOD.PUT, data);
+}
+
+function deleteStorage(key) {
+  return exec(PATH.storage + '/' + key, METHOD.DELETE);
 }
 
 function buildURL(path) {
