@@ -72,6 +72,11 @@ fs.readFile(imagePath, (err, file) => {
 * createCustomer(data)
 * updateCustomer(customerId, data)
 * deleteCustomer(customerId)
+* getAllStorage()
+* getStorage(key)
+* addStorage(key, data)
+* editStorage(key, data)
+* deleteStorage(key)
 
 **Testing**
 
