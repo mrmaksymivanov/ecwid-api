@@ -2,6 +2,9 @@ var expect = require("chai").expect;
 var { storeId, secret } = require("../config");
 var ecwid = require("../ecwid")(storeId, secret);
 
+
+const TEST_TIMEOUT = 15000;
+
 // go tests
 describe("Test getProducts offset and limit (in options)", function() {
     it(`should get all products in a cycle and stop`, async function () {
@@ -15,5 +18,5 @@ describe("Test getProducts offset and limit (in options)", function() {
             offset += limit;
         }
         expect(productList.length).to.be.above(0);
-    });
+    }).timeout(TEST_TIMEOUT);
 });
