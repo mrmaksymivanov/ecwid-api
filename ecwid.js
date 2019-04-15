@@ -20,7 +20,8 @@ var PATH = {
   customers: 'customers',
   categories: 'categories',
   classes: 'classes',
-  storage: 'storage'
+  storage: 'storage',
+  orders: 'orders'
 };
 
 function ecwid(storeId, accessToken) {
@@ -32,6 +33,8 @@ function ecwid(storeId, accessToken) {
   return {
     getClasses,
     getStoreProfile,
+
+    getOrderDetails,
 
     searchProducts,
     getProducts,
@@ -72,6 +75,10 @@ function getClasses() {
 
 function getStoreProfile() {
   return exec(PATH.profile, METHOD.GET);
+}
+
+function getOrderDetails(orderId) {
+  return exec(PATH.orders + '/' + orderId, METHOD.GET);
 }
 
 function searchProducts(options) {

@@ -52,6 +52,7 @@ fs.readFile(imagePath, (err, file) => {
 
 * getStoreProfile
 * searchProducts(options)
+* getOrderDetails(orderId)
 * getProducts
 * getProduct(productId)
 * addProduct(product)
