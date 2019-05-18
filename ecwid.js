@@ -44,6 +44,8 @@ function ecwid(storeId, accessToken) {
     updateProduct,
     uploadProductImage,
     deleteProductImage,
+    uploadGalleryImage,
+    cleanGallery,
 
     getCategories,
     addCategory,
@@ -115,6 +117,18 @@ function uploadProductImage(productId, buffer) {
 
 function deleteProductImage(productId) {
   return exec(PATH.products + '/' + productId + '/image', METHOD.DELETE);
+}
+
+function uploadGalleryImage(productId, buffer) {
+  return request.post({
+    uri: buildURL(PATH.products + '/' + productId + '/gallery'),
+    headers: { 'content-type': 'image/jpeg' },
+    body: buffer
+  });
+}
+
+function cleanGallery(productId) {
+  return exec(PATH.products + '/' + productId + '/gallery', METHOD.DELETE);
 }
 
 function searchOrders(options) {
