@@ -18,7 +18,10 @@ var PATH = {
   products: 'products',
   orders: 'orders',
   customers: 'customers',
-  categories: 'categories'
+  categories: 'categories',
+  classes: 'classes',
+  storage: 'storage',
+  orders: 'orders'
 };
 
 function ecwid(storeId, accessToken) {
@@ -28,42 +31,64 @@ function ecwid(storeId, accessToken) {
   ACCESS_TOKEN = accessToken;
 
   return {
-    getStoreProfile: getStoreProfile,
+    getClasses,
+    getStoreProfile,
 
-    searchProducts: searchProducts,
-    getProducts: getProducts,
-    getProduct: getProduct,
-    addProduct: addProduct,
-    deleteProduct: deleteProduct,
-    updateProduct: updateProduct,
-    uploadProductImage: uploadProductImage,
-    deleteProductImage: deleteProductImage,
+    getOrderDetails,
 
-    updateCategory: updateCategory,
+    searchProducts,
+    getProducts,
+    getProduct,
+    addProduct,
+    deleteProduct,
+    updateProduct,
+    uploadProductImage,
+    deleteProductImage,
+    uploadGalleryImage,
+    cleanGallery,
 
-    searchOrders: searchOrders,
-    getOrderDetails: getOrderDetails,
-    updateOrder: updateOrder,
-    deleteOrder: deleteOrder,
+    getCategories,
+    addCategory,
+    deleteCategory,
+    updateCategory,
 
-    searchCustomers: searchCustomers,
-    getCustomer: getCustomer,
-    createCustomer: createCustomer,
-    updateCustomer: updateCustomer,
-    deleteCustomer: deleteCustomer
+    searchOrders,
+    getOrderDetails,
+    updateOrder,
+    deleteOrder,
+
+    searchCustomers,
+    getCustomer,
+    createCustomer,
+    updateCustomer,
+    deleteCustomer,
+
+    getAllStorage,
+    getStorage,
+    addStorage,
+    editStorage,
+    deleteStorage
   };
+}
+
+function getClasses() {
+  return exec(PATH.classes, METHOD.GET);
 }
 
 function getStoreProfile() {
   return exec(PATH.profile, METHOD.GET);
 }
 
+function getOrderDetails(orderId) {
+  return exec(PATH.orders + '/' + orderId, METHOD.GET);
+}
+
 function searchProducts(options) {
   return exec(PATH.products, METHOD.GET, options);
 }
 
-function getProducts() {
-  return exec(PATH.products, METHOD.GET);
+function getProducts(options) {
+  return exec(PATH.products, METHOD.GET, options);
 }
 
 function getProduct(productId) {
@@ -94,6 +119,18 @@ function deleteProductImage(productId) {
   return exec(PATH.products + '/' + productId + '/image', METHOD.DELETE);
 }
 
+function uploadGalleryImage(productId, buffer) {
+  return request.post({
+    uri: buildURL(PATH.products + '/' + productId + '/gallery'),
+    headers: { 'content-type': 'image/jpeg' },
+    body: buffer
+  });
+}
+
+function cleanGallery(productId) {
+  return exec(PATH.products + '/' + productId + '/gallery', METHOD.DELETE);
+}
+
 function searchOrders(options) {
   return exec(PATH.orders, METHOD.GET, options);
 }
@@ -108,6 +145,18 @@ function updateOrder(orderNumber, data) {
 
 function deleteOrder(orderNumber) {
   return exec(PATH.orders + '/' + orderNumber, METHOD.DELETE);
+}
+
+function getCategories(options) {
+  return exec(PATH.categories, METHOD.GET, options);
+}
+
+function addCategory(category) {
+  return exec(PATH.categories, METHOD.POST, category);
+}
+
+function deleteCategory(categoryId) {
+  return exec(PATH.categories + '/' + categoryId, METHOD.DELETE);
 }
 
 function updateCategory(categoryId, data) {
@@ -132,6 +181,26 @@ function updateCustomer(customerId, data) {
 
 function deleteCustomer(customerId) {
   return exec(PATH.customers + '/' + customerId, METHOD.DELETE);
+}
+
+function getAllStorage() {
+  return exec(PATH.storage, METHOD.GET);
+}
+
+function getStorage(key) {
+  return exec(PATH.storage + '/' + key, METHOD.GET);
+}
+
+function addStorage(key, data) {
+  return exec(PATH.storage + '/' + key, METHOD.POST, data);
+}
+
+function editStorage(key, data) {
+  return exec(PATH.storage + '/' + key, METHOD.PUT, data);
+}
+
+function deleteStorage(key) {
+  return exec(PATH.storage + '/' + key, METHOD.DELETE);
 }
 
 function buildURL(path) {
