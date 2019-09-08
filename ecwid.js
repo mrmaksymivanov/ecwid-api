@@ -43,8 +43,10 @@ function ecwid(storeId, accessToken) {
     deleteProduct,
     updateProduct,
     uploadProductImage,
+    uploadProductImageExternal,
     deleteProductImage,
     uploadGalleryImage,
+    uploadGalleryImageExternal,
     cleanGallery,
 
     getCategories,
@@ -115,6 +117,11 @@ function uploadProductImage(productId, buffer) {
   });
 }
 
+function uploadProductImageExternal(productId, externalUrl) {
+  return exec(PATH.products + '/' + productId + '/image?externalUrl=' +
+          encodeURIComponent(externalUrl), METHOD.POST);
+}
+
 function deleteProductImage(productId) {
   return exec(PATH.products + '/' + productId + '/image', METHOD.DELETE);
 }
@@ -125,6 +132,11 @@ function uploadGalleryImage(productId, buffer) {
     headers: { 'content-type': 'image/jpeg' },
     body: buffer
   });
+}
+
+function uploadGalleryImageExternal(productId, externalUrl) {
+  return exec(PATH.products + '/' + productId + '/gallery?externalUrl=' +
+        encodeURIComponent(externalUrl), METHOD.POST);
 }
 
 function cleanGallery(productId) {
@@ -209,7 +221,7 @@ function buildURL(path) {
     STORE_ID +
     '/' +
     path +
-    '?' +
+    (path.includes('?') ? '&' : '?') +
     qs.stringify({ token: ACCESS_TOKEN })
   );
 }
